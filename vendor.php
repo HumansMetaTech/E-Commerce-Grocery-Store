@@ -4,7 +4,6 @@ if(isset($_SESSION['user']))
 {
 	header("location:vendor-index.php");
 }
-$cust= $_SESSION['customer'];
 include("connection.php");
 error_reporting(0);
 ?>
@@ -85,7 +84,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				
 			?>
 			<div class="header">
-				<b>Welcome </b><b style="color: green;"><?php echo $cust; ?></b>
+				<b>Welcome </b><b style="color: green;"><?php echo $_SESSION['customer']; ?></b>
 			</div>
 
 			<div class="head-t">
