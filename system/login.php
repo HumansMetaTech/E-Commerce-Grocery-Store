@@ -4,7 +4,7 @@ if (isset($_SESSION['system'])) {
 	header("location:system-index.php");
 }
 
-include("./connection.php");
+include("../connection.php");
 error_reporting(0);
 ?>
 
@@ -218,6 +218,7 @@ error_reporting(0);
 
 		});
 	</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="./js/authentication.js"></script>
 </body>
 

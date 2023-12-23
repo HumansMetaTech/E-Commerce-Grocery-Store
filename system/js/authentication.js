@@ -1,23 +1,35 @@
+var request;
 $(document).ready(function () {
   $("form").submit(function (e) {
     e.preventDefault();
-    var formData = $(this).serialize();
-console.log(formData);
-    $.ajax({
+    if (request) {
+      request.abort();
+    }
+    var $form = $(this);
+    var $inputs = $form.find("input, select, button, textarea");
+    var serializedData = $form.serialize();
+    $inputs.prop("disabled", true);
+    request = $.ajax({
       type: "POST",
       url: "../system/actions/authentication.php",
-      data: formData,
-      success: function (response) {
-        if (response === "success") {
-          // Redirect to the desired page
-          window.location.href = "system-index.php";
-        } else {
-          alert("Invalid Username or Password");
-        }
-      },
-      error: function () {
-        alert("An error occurred during the AJAX request");
-      },
+      data: serializedData,
+    });
+    request.done(function (response, textStatus, jqXHR) {
+      // Log a message to the console
+      console.log(response);
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      // Log the error to the console
+      console.error("The following error occurred: " + textStatus, errorThrown);
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+      // Reenable the inputs
+      $inputs.prop("disabled", false);
     });
   });
 });
