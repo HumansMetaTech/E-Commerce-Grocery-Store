@@ -346,7 +346,7 @@
     */
     var $target = $(target);
     var options = OptionManager.getOptions(userOptions);
-    var $cartIcon = $("." + options.classCartIcon);
+    // var $cartIcon = $("." + options.classCartIcon);
     var $cartBadge = $("." + options.classCartBadge);
 
     /*
