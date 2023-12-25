@@ -1,23 +1,38 @@
 <?php
-session_start();
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+include_once('../classes/DBUser.php');
+
 if (isset($_POST['submit'])) {
     $email = $_POST['Email'];
     $passwd = $_POST['Password'];
-    echo "<script type='text/javascript'>  alert($email)</script>";
+
     if ($email != "" && $passwd != "") {
-        $query = "SELECT * from customers where email='$email' && password='$passwd'";
-        $data = mysqli_query($conn, $query);
-        $total = mysqli_num_rows($data);
+        $con = new DBUser();
+        $d = $con->GetConnection();
+        $query = "SELECT COUNT(*) as count FROM `tabUsers` WHERE email = ? AND password = ?";
+        $stmt = $conn->prepare($query);
+
+        // Bind parameters
+        $stmt->bind_param("ss", $email, $passwd);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Get the result
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $total = $row['count'];
+        $stmt->close();
+        $conn->close();
+
         if ($total == 1) {
+            session_start();
             $_SESSION['customer'] = $email;
-            echo "<script type='text/javascript'>  window.location='system-index.php'; </script>";
+            header("Location: system-index.php");
+            exit();
         } else {
-            echo "Invalid Username or Password Ali";
+            echo "Invalid Username or Password";
         }
     } else {
         echo "All Fields Required";
     }
 }
-?>

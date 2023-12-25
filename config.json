@@ -1,0 +1,9 @@
+{
+  "ConnectionString": {
+    "database": "",
+    "host": "",
+    "username": "",
+    "password": "",
+    "port": "3306"
+  }
+}
