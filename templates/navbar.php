@@ -43,24 +43,24 @@
       </div>
       <div class="modal-body">
         <form id="update_del" enctype="multipart/form-data" method="post">
-          <div class="row">
+          <div class="row justify-content-center">
             <div class="col-12">
               <div class="form-group">
                 <div class="col-12">
-                <input type="password" name="old_password" placeholder="Enter Current Password"> 
-            </div>
-            <br>
-            <div class="col-12">
-                <input type="password" name="new_pass" placeholder="Enter New Password"> 
-            </div>
-            <br>
-            <div class="col-12">
-                <input type="password" name="c_new_pass" placeholder="Confirm New Password"> 
-            </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <input name="ch" type="submit" class="btn btn-primary add-category" value="Change Password">
+                  <input type="password" class="form-control" name="old_password" placeholder="Enter Current Password"> 
+                </div>
+                <br>
+                <div class="col-12">
+                  <input type="password" class="form-control" name="new_pass" placeholder="Enter New Password"> 
+                </div>
+                <br>
+                <div class="col-12">
+                  <input type="password" class="form-control" name="c_new_pass" placeholder="Confirm New Password"> 
+                </div>
+                <br>
+                <div class="col-12 justify-content-center">
+                  <input name="ch" type="submit" class="btn btn-primary add-category" value="Change Password">
+                </div>
             </div>
           </div>
         </form>
