@@ -15,7 +15,7 @@ $("form").submit(function (e) {
   });
   request.done(function (response, textStatus, jqXHR) {
     // Log a message to the console
-    console.log(response);
+    alert(response);
   });
 
   // Callback handler that will be called on failure

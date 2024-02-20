@@ -1,32 +1,25 @@
 <?php
-include_once('../classes/DBUser.php');
+include_once(__DIR__ . '\classes\DBUser.php');
 
 if (isset($_POST['submit'])) {
     $email = $_POST['Email'];
     $passwd = $_POST['Password'];
 
     if ($email != "" && $passwd != "") {
-        $con = new DBUser();
-        $d = $con->GetConnection();
-        $query = "SELECT COUNT(*) as count FROM `tabUsers` WHERE email = ? AND password = ?";
-        $stmt = $conn->prepare($query);
-
-        // Bind parameters
-        $stmt->bind_param("ss", $email, $passwd);
-
-        // Execute the query
+        $dbuser = new DBUser();
+        $con = $dbuser->GetConnection();
+        $query = "SELECT COUNT(*) as count FROM `tabUsers` WHERE user_name = ? AND password = ? AND disabled = 0";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ss", $email, md5($passwd));
         $stmt->execute();
-
-        // Get the result
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $total = $row['count'];
         $stmt->close();
         $conn->close();
-
-        if ($total == 1) {
+        if ($total >= 1) {
             session_start();
-            $_SESSION['customer'] = $email;
+            $_SESSION['system_user'] = $email;
             header("Location: system-index.php");
             exit();
         } else {
