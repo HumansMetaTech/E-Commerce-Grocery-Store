@@ -119,7 +119,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<form action="" method="get">
 						<div class="key">
 							<i class="fa fa-user" aria-hidden="true"></i>
-							<input  type="text" value="Username" name="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" required="true">
+							<input  type="text" value="Username" name="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" required>
 							<div class="clearfix"></div>
 						</div>
 						<div class="key">
@@ -176,7 +176,6 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						if($uname != "" && $email != "" && $phone != "" && $city != "" && $pincode != "" && $passwd != ""){
 
 							if($passwd == $cpasswd){
-
 								$query= "INSERT INTO customers values (DEFAULT,'$uname','$email','$street','$city','$pincode','$passwd','$phone')";
 								$data= mysqli_query($conn, $query);
 
